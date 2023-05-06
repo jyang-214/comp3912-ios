@@ -10,6 +10,9 @@ import UIKit
 class GameViewController: UIViewController {
 
     var counter = 1
+    var tag1: Int?
+    var tag2: Int?
+    var imageMap:[Int:String] = [:]
     
     @IBOutlet weak var timerLabel: UILabel!
     
@@ -23,6 +26,8 @@ class GameViewController: UIViewController {
 //        counter+=1
 //        countdown.text = String(counter) + "s"
 //        print(String(counter) + "s")
+        let _ = imageMap.keys.enumerated().map {(self.view.viewWithTag($1) as? UIImageView)?.startAnimating()}
+                //startCountdown()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,5 +67,21 @@ class GameViewController: UIViewController {
             }
         }
     }
+    
+    @objc func imageViewTapped(_ sender: UITapGestureRecognizer){
+            guard let tappedView = sender.view else { return }
+            
+            
+            if(tag1==nil){
+                tag1 = tappedView.tag
+                (tappedView as? UIImageView)?.image = UIImage(named: imageMap[tag1!]!)
+            } else if(tag2==nil){
+                tag2 = tappedView.tag
+                (tappedView as? UIImageView)?.image = UIImage(named: imageMap[tag2!]!)
+            }
+            
+//            judge(tag1, tag2)
+            
+        }
 }
 
