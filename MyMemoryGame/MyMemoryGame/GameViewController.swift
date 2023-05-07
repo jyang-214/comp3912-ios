@@ -13,6 +13,8 @@ class GameViewController: UIViewController {
     var tag1: Int?
     var tag2: Int?
     var imageMap:[Int:String] = [:]
+    var timer = 1
+    var point = 0.0
     
     @IBOutlet weak var timerLabel: UILabel!
     
@@ -27,7 +29,7 @@ class GameViewController: UIViewController {
 //        countdown.text = String(counter) + "s"
 //        print(String(counter) + "s")
         let _ = imageMap.keys.enumerated().map {(self.view.viewWithTag($1) as? UIImageView)?.startAnimating()}
-                //startCountdown()
+                startCountdown()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,8 +82,79 @@ class GameViewController: UIViewController {
                 (tappedView as? UIImageView)?.image = UIImage(named: imageMap[tag2!]!)
             }
             
-//            judge(tag1, tag2)
+            judge(tag1, tag2)
             
         }
+    
+    func startCountdown(){
+            var countdownSeconds = 5
+            let _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                    countdownSeconds -= 1
+                    if countdownSeconds <= 0 {
+                        timer.invalidate()
+                        self.countdown.isHidden=true
+                        self.startTimer()
+
+                    } else {
+                        self.countdown.text = String(countdownSeconds)+"s"
+                        //countdownSeconds = countdownSeconds - 1
+                        self.countdown.isHidden=false
+                    }
+            }
+        }
+    
+    func startTimer(){
+            var countdownSeconds = 30
+            timer = 1
+            let _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                    countdownSeconds -= 1
+                    if countdownSeconds <= 0 {
+                        timer.invalidate()
+                        self.timerLabel.isHidden=true
+//                        self.gameover()
+
+                    } else {
+                        self.timerLabel.text = String(countdownSeconds)+"s remaining!"
+                        self.timerLabel.isHidden=false
+                        self.timer += 1
+                    }
+            }
+        }
+    
+    func judge(_ tag1: Int?, _ tag2: Int?){
+        if(tag1 != nil && tag2 != nil){
+            if(imageMap[tag1!]==imageMap[tag2!]){
+                self.tag1=nil
+                self.tag2=nil
+                
+                point = point + 1.0 / Double(self.timer)
+                
+                pointLabel.text = String(round(point*100))+"Points"
+            } else {
+                let placeholderImage = UIImage(systemName: "questionmark")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    (self.view.viewWithTag(self.tag1!) as! UIImageView).image = placeholderImage
+                    (self.view.viewWithTag(self.tag2!) as! UIImageView).image = placeholderImage
+
+                    self.tag1=nil
+                    self.tag2=nil
+                }
+            }
+        }
+    }
+    
+    func reset(){
+        self.tag1=nil
+        self.tag2=nil
+        
+        countdown.isHidden = true
+        timerLabel.isHidden = false
+        let _ = view.subviews.filter { $0 is UIImageView
+        }.enumerated().map {
+            $1.tag = $0+1000
+            $1.tintColor = .lightGray
+        }
+        
+    }
 }
 
