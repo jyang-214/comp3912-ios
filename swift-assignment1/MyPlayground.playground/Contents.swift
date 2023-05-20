@@ -1,4 +1,3 @@
-import UIKits
 import Foundation
 
 //Problem 1 & 2
@@ -213,3 +212,30 @@ for operation in operations {
   }
 }
 
+//Problem 4
+//====================================================
+//----------------------------------------------------
+func sorter(_ list:[String]?, criteria by: (String, String)->Bool) -> [String]? {
+    guard let words = list else{return nil}
+    let sortedWords = words.sorted(by: by)
+    return sortedWords
+}
+
+let list1 = ["one", "two", "three", "four", "five"]
+let criteria1: (String, String) -> Bool = {(string1: String, string2: String)-> Bool in return string1 < string2}
+let sortedList1 = sorter(list1, criteria: criteria1)
+print(sortedList1)
+
+let list2 = ["one", "two", "three", "four", "five"]
+let criteria2: (String, String) -> Bool = {(string1: String, string2: String)-> Bool in return string1 > string2}
+let sortedList2 = sorter(list2, criteria: criteria2)
+print(sortedList2)
+
+let list3 = ["aa", "aba", "b", "aabbb"]
+let criteria3: (String, String) -> Bool = {(string1: String, string2: String)-> Bool in return string1.count > string2.count}
+let sortedList3 = sorter(list3, criteria: criteria3)
+print(sortedList3)
+
+//Problem 5
+//====================================================
+//----------------------------------------------------
