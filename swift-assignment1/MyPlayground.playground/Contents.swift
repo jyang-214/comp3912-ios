@@ -1,4 +1,5 @@
-import UIKit
+import UIKits
+import Foundation
 
 //Problem 1 & 2
 //====================================================
@@ -197,11 +198,18 @@ let operationDictionary: [String: (Int, Int) -> Double] = [
   "multiplication": multiplication,
 ]
 
-func calculator(num1: Int, num2: Int, op: String) -> (Double, (Int, Int) -> Double) {
-  if let function = operationDictionary[op] {
-    let result = function(num1, num2)
-    return (result, function)
+func calculator(num1: Int, num2: Int, op: String) -> (Double, (Int, Int) -> Double)? {
+  if let operationFunction = operationDictionary[op] {
+    let result = operationFunction(num1, num2)
+    return (result, operationFunction)
   } else {
     return nil
   }
 }
+
+for operation in operations {
+  if let result = calculator(num1: 10, num2: 20, op: operation) {
+    print("\(operation): \(result.0)")
+  }
+}
+
