@@ -215,27 +215,69 @@ for operation in operations {
 //Problem 4
 //====================================================
 //----------------------------------------------------
-func sorter(_ list:[String]?, criteria by: (String, String)->Bool) -> [String]? {
-    guard let words = list else{return nil}
-    let sortedWords = words.sorted(by: by)
-    return sortedWords
+func sorter(_ list: [String]?, criteria by: (String, String) -> Bool) -> [String]? {
+  guard let words = list else { return nil }
+  let sortedWords = words.sorted(by: by)
+  return sortedWords
 }
 
 let list1 = ["one", "two", "three", "four", "five"]
-let criteria1: (String, String) -> Bool = {(string1: String, string2: String)-> Bool in return string1 < string2}
+let criteria1: (String, String) -> Bool = { (string1: String, string2: String) -> Bool in
+  return string1 < string2
+}
 let sortedList1 = sorter(list1, criteria: criteria1)
 print(sortedList1)
 
 let list2 = ["one", "two", "three", "four", "five"]
-let criteria2: (String, String) -> Bool = {(string1: String, string2: String)-> Bool in return string1 > string2}
+let criteria2: (String, String) -> Bool = { (string1: String, string2: String) -> Bool in
+  return string1 > string2
+}
 let sortedList2 = sorter(list2, criteria: criteria2)
 print(sortedList2)
 
 let list3 = ["aa", "aba", "b", "aabbb"]
-let criteria3: (String, String) -> Bool = {(string1: String, string2: String)-> Bool in return string1.count > string2.count}
+let criteria3: (String, String) -> Bool = { (string1: String, string2: String) -> Bool in
+  return string1.count > string2.count
+}
 let sortedList3 = sorter(list3, criteria: criteria3)
 print(sortedList3)
 
 //Problem 5
 //====================================================
 //----------------------------------------------------
+func filter(_ numbers: [Int], predicates: [(Int) -> Bool]) -> [Int]? {
+  let filterdNumbers = numbers.filter {
+    number in predicates.allSatisfy { $0(number) }
+  }
+  return filterdNumbers
+}
+
+let isOdd = {
+  (number: Int) -> Bool in
+  return number % 2 != 0
+}
+
+let isPrime = {
+  (number: Int) -> Bool in
+  guard number > 1 else { return false }
+  for i in 2..<number {
+    if number % i == 0 {
+      return false
+    }
+  }
+  return true
+}
+
+let isOddAndPrime = {
+  (number: Int) -> Bool in
+  return isOdd(number) && isPrime(number)
+}
+
+let isDivisibleBy7 = {
+  (number: Int) -> Bool in
+  return number % 7 == 0
+}
+let predicates = [isOdd, isPrime, isOddAndPrime, isDivisibleBy7]
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let filteredNumbers = filter(numbers, predicates: predicates)
+print(filteredNumbers)
