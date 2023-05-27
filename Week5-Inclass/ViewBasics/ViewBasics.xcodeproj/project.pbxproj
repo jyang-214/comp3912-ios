@@ -13,6 +13,8 @@
 		85BA51062A2263A3001CCAB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BA51042A2263A3001CCAB0 /* Main.storyboard */; };
 		85BA51082A2263A4001CCAB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85BA51072A2263A4001CCAB0 /* Assets.xcassets */; };
 		85BA510B2A2263A4001CCAB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BA51092A2263A4001CCAB0 /* LaunchScreen.storyboard */; };
+		85BA51152A227F59001CCAB0 /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BA51142A227F59001CCAB0 /* ColorViewController.swift */; };
+		85BA51172A22834F001CCAB0 /* AnotherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BA51162A22834F001CCAB0 /* AnotherViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		85BA51072A2263A4001CCAB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85BA510A2A2263A4001CCAB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85BA510C2A2263A4001CCAB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85BA51142A227F59001CCAB0 /* ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
+		85BA51162A22834F001CCAB0 /* AnotherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				85BA51072A2263A4001CCAB0 /* Assets.xcassets */,
 				85BA51092A2263A4001CCAB0 /* LaunchScreen.storyboard */,
 				85BA510C2A2263A4001CCAB0 /* Info.plist */,
+				85BA51142A227F59001CCAB0 /* ColorViewController.swift */,
+				85BA51162A22834F001CCAB0 /* AnotherViewController.swift */,
 			);
 			path = ViewBasics;
 			sourceTree = "<group>";
@@ -139,7 +145,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				85BA51032A2263A3001CCAB0 /* HomeViewController.swift in Sources */,
+				85BA51172A22834F001CCAB0 /* AnotherViewController.swift in Sources */,
 				85BA50FF2A2263A3001CCAB0 /* AppDelegate.swift in Sources */,
+				85BA51152A227F59001CCAB0 /* ColorViewController.swift in Sources */,
 				85BA51012A2263A3001CCAB0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
