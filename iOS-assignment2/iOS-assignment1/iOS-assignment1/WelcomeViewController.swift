@@ -15,12 +15,10 @@ class WelcomeViewController: UIViewController {
     }
 
     @IBAction func Login(_ sender: Any) {
-        print("Login has been clicked.")
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Replace "Main" with your storyboard name
-//            let navController = storyboard.instantiateViewController(withIdentifier: "LoginNavigationControllerID") as! UINavigationController
-//
-//        self.modalPresentationStyle = .fullScreen
-//            self.present(navController, animated: true, completion: nil)
+        print("Log in has been clicked.")
     }
     
+    @IBAction func SignUp(_ sender: Any) {
+        print("Sign Up has been clicked.")
+    }
 }
