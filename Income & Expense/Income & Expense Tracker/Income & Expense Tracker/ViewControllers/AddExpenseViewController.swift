@@ -13,6 +13,9 @@ class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet weak var transactionDescriptionTextField: UITextField!
     @IBOutlet weak var transactionNameTextField: UITextField!
     
+    weak var delegate: AddExpenseDelegate?
+    
+    
     let transactionTypes = ["Expense", "Income", "Investment"] // Replace with your transaction types
     let categories = ["Food", "Transportation", "Entertainment", "Shopping", "Others"]
     let paymentTypes = ["Cash", "Credit Card", "Debit Card", "Online Payment"]
@@ -103,11 +106,11 @@ class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBAction func categoryDropdownButtonTapped(_ sender: UIButton) {
         categoryDropdownPickerView.isHidden = !categoryDropdownPickerView.isHidden
     }
-
+    
     @IBAction func paymentTypeDropdownButtonTapped(_ sender: UIButton) {
         paymentTypeDropdownPickerView.isHidden = !paymentTypeDropdownPickerView.isHidden
     }
-
+    
     // MARK: - Close and Add Button Actions
     
     @objc func closeButtonTapped() {
@@ -115,13 +118,32 @@ class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPick
     }
     
     @objc func addButtonTapped() {
+        // Create a date formatter
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, yyyy" // Set the desired date format
+        
+        // Get the selected date from the date picker
+        let selectedDate = datePicker.date
+
+        // Convert the date to the desired string format
+        let formattedDate = dateFormatter.string(from: selectedDate)
+        
+        // Assuming `expense` is an instance of Expense containing the entered details
+        let expense = Expense(
+            expenseName: transactionNameTextField.text ?? "",
+            location: transactionDescriptionTextField.text ?? "",
+            dollarAmount: Double(dollarAmountTextField.text ?? "0") ?? 0.0,
+            category: categoryDropdownButton.title(for: .normal) ?? "",
+            date: formattedDate
+        )
+        
         if let name = transactionNameTextField.text {
             print(name)
         }
         
         // Save the selected date value from the date picker
-        let selectedDate = datePicker.date
-        print(selectedDate)
+//        let selectedDate = datePicker.date
+        print(formattedDate)
         
         // Get the selected transaction type from the button title
         guard let selectedTransactionType = transactionTypeDropdownButton.title(for: .normal) else {
@@ -149,6 +171,12 @@ class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPick
         if let description = transactionDescriptionTextField.text {
             print(description)
         }
+        // Assuming `expenseData` is an instance of Expense containing the entered details
+        delegate?.didAddExpense(expense)
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+protocol AddExpenseDelegate: AnyObject {
+    func didAddExpense(_ expense: Expense) // Customize the data type based on your ExpenseData structure.
 }

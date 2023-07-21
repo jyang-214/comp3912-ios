@@ -9,10 +9,11 @@ import Foundation
 
 import UIKit
 
-class ExpenseListViewController: UITableViewController {
+class ExpenseListViewController: UITableViewController, AddExpenseDelegate {
     
-    let data = DataProvider.makeData()
+    var data = DataProvider.makeData()
     
+    var navController: UINavigationController?
     
     
     
@@ -30,10 +31,19 @@ class ExpenseListViewController: UITableViewController {
         // For example, show an add expense screen or perform some other action
         print("Add button has been clicked")
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // Replace "Main" with your storyboard name
-        let navController = storyboard.instantiateViewController(withIdentifier: "AddExpenseNavigationControllerID") as! UINavigationController
+        //        let navController = storyboard.instantiateViewController(withIdentifier: "AddExpenseNavigationControllerID") as! UINavigationController
+        let addExpenseVC = storyboard.instantiateViewController(withIdentifier: "AddExpenseNavigationControllerID") as! UINavigationController
+        // Set the delegate of AddExpenseViewController to ExpenseListViewController
+        if let addExpenseViewController = addExpenseVC.viewControllers.first as? AddExpenseViewController {
+            addExpenseViewController.delegate = self
+        }
         
+        // Store the navigation controller to use it later
+        navController = addExpenseVC
         
-        self.present(navController, animated: true, completion: nil)
+        //        self.present(navController, animated: true, completion: nil)
+        self.present(addExpenseVC, animated: true, completion: nil)
+        
     }
     
     override func viewDidLoad() {
@@ -43,6 +53,7 @@ class ExpenseListViewController: UITableViewController {
         
         //registration of the ExpenseCell which is a UITableViewCell
         tableView.register(ExpenseCell.self, forCellReuseIdentifier: "cell")
+        
     }
     
     
@@ -93,8 +104,37 @@ class ExpenseListViewController: UITableViewController {
         // Present the `UINavigationController` modally
         self.present(navigationController, animated: true, completion: nil)
     }
+    
+    func didAddExpense(_ expense: Expense) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, yyyy"
+        
+        guard let expenseDate = dateFormatter.date(from: expense.date) else {
+            // If the date cannot be converted to a valid Date object, do not add the expense.
+            return
+        }
+        
+        if let existingSectionIndex = data.firstIndex(where: { $0.0 == expense.date }) {
+            // If a section with the same date already exists, append the expense to that section
+            data[existingSectionIndex].1.append(expense)
+            
+            // Sort the expense array in the section from newest to oldest
+            data[existingSectionIndex].1.sort(by: { $0.date > $1.date })
+        } else {
+            // Otherwise, create a new section with the expense date
+            data.append((expense.date, [expense]))
+        }
+        
+        // Sort the data array based on the section dates from newest to oldest
+        data.sort(by: { dateFormatter.date(from: $0.0)! > dateFormatter.date(from: $1.0)! })
+        
+        tableView.reloadData()
+    }
 
 
-
+    
+    
+    
+    
     
 }

@@ -14,4 +14,5 @@ struct Expense {
     var location: String
     var dollarAmount: Double
     var category: String
+    var date: String
 }
