@@ -1,7 +1,14 @@
+//
+//  AddExpenseViewController.swift
+//  Income & Expense Tracker
+//
+//  Created by Jacky Yang on 2023-07-07.
+//
 import Foundation
 import UIKit
 
-class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+
+class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var transactionTypeDropdownButton: UIButton!
     @IBOutlet weak var transactionTypeDropdownPickerView: UIPickerView!
@@ -16,9 +23,9 @@ class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPick
     weak var delegate: AddExpenseDelegate?
     
     
-    let transactionTypes = ["Expense", "Income", "Investment"] // Replace with your transaction types
-    let categories = ["Food", "Transportation", "Entertainment", "Shopping", "Others"]
-    let paymentTypes = ["Cash", "Credit Card", "Debit Card", "Online Payment"]
+    let transactionTypes = ["Expense", "Income"]
+    let categories = ["Grocery", "Restaurants", "Gas", "Entertainment", "Recurring Bills" ,"Others"]
+    let paymentTypes = ["Cash", "Credit Card", "Debit Card"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +37,13 @@ class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPick
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = addButton
         
-        // Set up the picker view
+        transactionNameTextField.layer.borderWidth = 1.0
+        transactionNameTextField.layer.borderColor = UIColor.black.cgColor
+        transactionNameTextField.layer.cornerRadius = 8.0
+        transactionNameTextField.textAlignment = .left
+        transactionNameTextField.contentVerticalAlignment = .top
+        transactionNameTextField.delegate = self
+        
         transactionTypeDropdownPickerView.dataSource = self
         transactionTypeDropdownPickerView.delegate = self
         transactionTypeDropdownPickerView.isHidden = true // Hide the picker view initially
@@ -39,11 +52,59 @@ class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPick
         categoryDropdownPickerView.delegate = self
         categoryDropdownPickerView.isHidden = true
         
+        dollarAmountTextField.layer.borderWidth = 1.0
+        dollarAmountTextField.layer.borderColor = UIColor.black.cgColor
+        dollarAmountTextField.layer.cornerRadius = 8.0
+        dollarAmountTextField.textAlignment = .left
+        dollarAmountTextField.contentVerticalAlignment = .top
+        dollarAmountTextField.delegate = self
+        
         paymentTypeDropdownPickerView.dataSource = self
         paymentTypeDropdownPickerView.delegate = self
         paymentTypeDropdownPickerView.isHidden = true
         
+        let transactionDescriptionPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0)) // Adjust the width as per your desired offset
+        transactionDescriptionTextField.leftView = transactionDescriptionPaddingView
+        transactionDescriptionTextField.leftViewMode = .always
+        transactionDescriptionTextField.textAlignment = .left
+        transactionDescriptionTextField.contentVerticalAlignment = .top
+        transactionDescriptionTextField.layer.borderWidth = 1.0
+        transactionDescriptionTextField.layer.borderColor = UIColor.black.cgColor
+        transactionDescriptionTextField.layer.cornerRadius = 8.0
+        transactionDescriptionTextField.delegate = self
+        
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
+        setupDoneButton(for: transactionNameTextField)
+        setupDoneButton(for: dollarAmountTextField)
+        setupDoneButton(for: transactionDescriptionTextField)
+        
     }
+    
+    // UITextFieldDelegate method to handle return key
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func setupDoneButton(for textField: UITextField) {
+        let toolbar = UIToolbar(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: 44)))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        toolbar.items = [flexibleSpace, doneButton]
+        textField.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonTapped() {
+        view.endEditing(true)
+    }
+    
     
     // MARK: - UIPickerViewDataSource
     
@@ -124,53 +185,32 @@ class AddExpenseViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         // Get the selected date from the date picker
         let selectedDate = datePicker.date
-
+        
         // Convert the date to the desired string format
         let formattedDate = dateFormatter.string(from: selectedDate)
-        
-        // Assuming `expense` is an instance of Expense containing the entered details
-        let expense = Expense(
-            expenseName: transactionNameTextField.text ?? "",
-            location: transactionDescriptionTextField.text ?? "",
-            dollarAmount: Double(dollarAmountTextField.text ?? "0") ?? 0.0,
-            category: categoryDropdownButton.title(for: .normal) ?? "",
-            date: formattedDate
-        )
-        
-        if let name = transactionNameTextField.text {
-            print(name)
-        }
-        
-        // Save the selected date value from the date picker
-//        let selectedDate = datePicker.date
-        print(formattedDate)
         
         // Get the selected transaction type from the button title
         guard let selectedTransactionType = transactionTypeDropdownButton.title(for: .normal) else {
             // Handle if no transaction type is selected
             return
         }
-        print(selectedTransactionType)
-        
-        guard let selectedCategory = categoryDropdownButton.title(for: .normal) else {
-            // Handle if no transaction type is selected
-            return
-        }
-        print(selectedCategory)
         
         guard let selectedPaymentType = paymentTypeDropdownButton.title(for: .normal) else {
             // Handle if no transaction type is selected
             return
         }
-        print(selectedPaymentType)
         
-        if let dollarAmount = dollarAmountTextField.text {
-            print(dollarAmount)
-        }
+        // Assuming `expense` is an instance of Expense containing the entered details
+        let expense = Expense(
+            expenseName: transactionNameTextField.text ?? "",
+            date: formattedDate,
+            expenseType: selectedTransactionType,
+            category: categoryDropdownButton.title(for: .normal) ?? "",
+            dollarAmount: Double(dollarAmountTextField.text ?? "0") ?? 0.0,
+            paymentType: selectedPaymentType,
+            description: transactionDescriptionTextField.text ?? ""
+        )
         
-        if let description = transactionDescriptionTextField.text {
-            print(description)
-        }
         // Assuming `expenseData` is an instance of Expense containing the entered details
         delegate?.didAddExpense(expense)
         self.dismiss(animated: true, completion: nil)

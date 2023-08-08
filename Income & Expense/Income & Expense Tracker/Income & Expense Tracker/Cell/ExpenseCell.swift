@@ -116,10 +116,10 @@ class ExpenseCell: UITableViewCell {
         ])
     }
     
-    func updateView(expenseName: String, dollarAmount: Double, location: String) {
+    func updateView(expenseName: String, dollarAmount: Double, category: String) {
         expenseNameLabel.text = expenseName
         dollarAmountLabel.text = "$\(String(format: "%.2f", dollarAmount))"
-        locationLabel.text = location
+        categoryLabel.text = category
     }
     
 }

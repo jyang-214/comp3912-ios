@@ -2,6 +2,8 @@
 //  DataProvider.swift
 //  Income & Expense Tracker
 //
+//  THIS CLASS IS NOT NEEDED ANYMORE. NO MORE HARD CODED DATA.
+//
 //  Created by Jacky Yang on 2023-07-07.
 //
 

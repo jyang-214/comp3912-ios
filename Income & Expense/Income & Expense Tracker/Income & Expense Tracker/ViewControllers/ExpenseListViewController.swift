@@ -9,27 +9,41 @@ import Foundation
 
 import UIKit
 
+import SwiftUI
+
 class ExpenseListViewController: UITableViewController, AddExpenseDelegate {
     
-    var data = DataProvider.makeData()
-    
+    var data: [(String, [Expense])] = []
     var navController: UINavigationController?
-    
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         self.navigationItem.title="Expense Tracker"
         
+        // Create a UIBarButtonItem with the system-defined menu icon
+            let menuBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"), style: .plain, target: self, action: #selector(menuButtonTapped))
+            
+            // Set the menu button as the left bar button item
+            self.navigationItem.leftBarButtonItem = menuBarButtonItem
+            
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         self.navigationItem.rightBarButtonItem = addButton
     }
     
+    @objc func menuButtonTapped() {
+        // Handle the menu button tap event
+        // For example, show a side menu or perform any other action you want
+        print("hamburger menu button pressed")
+        let sidebarMenuView = SidebarMenuView()
+                let hostingController = UIHostingController(rootView: sidebarMenuView)
+                present(hostingController, animated: true, completion: nil)
+    }
+    
     @objc func addButtonTapped() {
         // Perform the action when the button is tapped
         // For example, show an add expense screen or perform some other action
-        print("Add button has been clicked")
+        //        print("Add button has been clicked")
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // Replace "Main" with your storyboard name
         //        let navController = storyboard.instantiateViewController(withIdentifier: "AddExpenseNavigationControllerID") as! UINavigationController
         let addExpenseVC = storyboard.instantiateViewController(withIdentifier: "AddExpenseNavigationControllerID") as! UINavigationController
@@ -53,7 +67,9 @@ class ExpenseListViewController: UITableViewController, AddExpenseDelegate {
         
         //registration of the ExpenseCell which is a UITableViewCell
         tableView.register(ExpenseCell.self, forCellReuseIdentifier: "cell")
-        
+        // Load previously saved data from the file
+        data = ExpensePersistenceManager.loadData()
+        tableView.reloadData()
     }
     
     
@@ -79,8 +95,7 @@ class ExpenseListViewController: UITableViewController, AddExpenseDelegate {
         cell.updateView(
             expenseName: cellData.expenseName,
             dollarAmount: cellData.dollarAmount,
-            location: cellData.location
-            
+            category: cellData.category
         )
         return cell
     }
@@ -109,11 +124,6 @@ class ExpenseListViewController: UITableViewController, AddExpenseDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM d, yyyy"
         
-        guard let expenseDate = dateFormatter.date(from: expense.date) else {
-            // If the date cannot be converted to a valid Date object, do not add the expense.
-            return
-        }
-        
         if let existingSectionIndex = data.firstIndex(where: { $0.0 == expense.date }) {
             // If a section with the same date already exists, append the expense to that section
             data[existingSectionIndex].1.append(expense)
@@ -128,13 +138,28 @@ class ExpenseListViewController: UITableViewController, AddExpenseDelegate {
         // Sort the data array based on the section dates from newest to oldest
         data.sort(by: { dateFormatter.date(from: $0.0)! > dateFormatter.date(from: $1.0)! })
         
+        // Save the updated data to the file whenever a new expense is added
+        ExpensePersistenceManager.saveData(data)
         tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let sectionData = data[indexPath.section]
+            var expensesInSection = sectionData.1
+            expensesInSection.remove(at: indexPath.row)
+            
+            if expensesInSection.isEmpty {
+                data.remove(at: indexPath.section)
+                tableView.deleteSections([indexPath.section], with: .fade) // Update section count
+            } else {
+                data[indexPath.section].1 = expensesInSection
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+            ExpensePersistenceManager.saveData(data)
+        }
     }
 
 
-    
-    
-    
-    
-    
 }

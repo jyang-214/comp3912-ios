@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		850DBFF52A80D0C500B1144B /* SidebarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850DBFF42A80D0C500B1144B /* SidebarMenuView.swift */; };
+		850DBFF82A80D3DA00B1144B /* ExpenseSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850DBFF72A80D3DA00B1144B /* ExpenseSummaryView.swift */; };
+		850DBFFA2A80D57B00B1144B /* UIKitViewControllerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850DBFF92A80D57B00B1144B /* UIKitViewControllerWrapper.swift */; };
+		850DBFFC2A80D6AA00B1144B /* BudgetsSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850DBFFB2A80D6AA00B1144B /* BudgetsSettingView.swift */; };
+		850DC0072A819DA800B1144B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 850DC0062A819DA800B1144B /* SwiftUICharts */; };
+		850DC00B2A81B3BD00B1144B /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850DC00A2A81B3BD00B1144B /* Budget.swift */; };
+		8525379E2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525379D2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift */; };
 		853955082A59054A001970F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853955072A59054A001970F6 /* AppDelegate.swift */; };
 		8539550A2A59054A001970F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853955092A59054A001970F6 /* SceneDelegate.swift */; };
 		8539550C2A59054A001970F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8539550B2A59054A001970F6 /* ViewController.swift */; };
@@ -22,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		850DBFF42A80D0C500B1144B /* SidebarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarMenuView.swift; sourceTree = "<group>"; };
+		850DBFF72A80D3DA00B1144B /* ExpenseSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSummaryView.swift; sourceTree = "<group>"; };
+		850DBFF92A80D57B00B1144B /* UIKitViewControllerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitViewControllerWrapper.swift; sourceTree = "<group>"; };
+		850DBFFB2A80D6AA00B1144B /* BudgetsSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsSettingView.swift; sourceTree = "<group>"; };
+		850DC0002A819CFC00B1144B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		850DC00A2A81B3BD00B1144B /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
+		8525379D2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensePersistenceManager.swift; sourceTree = "<group>"; };
 		853955042A59054A001970F6 /* Income & Expense Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Income & Expense Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		853955072A59054A001970F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		853955092A59054A001970F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,17 +57,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				850DC0072A819DA800B1144B /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		850DBFF62A80D13E00B1144B /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				850DBFF42A80D0C500B1144B /* SidebarMenuView.swift */,
+				850DBFF72A80D3DA00B1144B /* ExpenseSummaryView.swift */,
+				850DBFF92A80D57B00B1144B /* UIKitViewControllerWrapper.swift */,
+				850DBFFB2A80D6AA00B1144B /* BudgetsSettingView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		850DBFFF2A819CFC00B1144B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				850DC0002A819CFC00B1144B /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		853954FB2A59054A001970F6 = {
 			isa = PBXGroup;
 			children = (
 				853955062A59054A001970F6 /* Income & Expense Tracker */,
 				853955052A59054A001970F6 /* Products */,
+				850DBFFF2A819CFC00B1144B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +103,7 @@
 		853955062A59054A001970F6 /* Income & Expense Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				850DBFF62A80D13E00B1144B /* SwiftUI */,
 				853955212A5917F7001970F6 /* Data */,
 				8539551E2A591768001970F6 /* Cell */,
 				8539551B2A5916BC001970F6 /* ViewControllers */,
@@ -105,6 +141,8 @@
 			children = (
 				853955222A59180D001970F6 /* DataProvider.swift */,
 				853955242A59182B001970F6 /* Expense.swift */,
+				8525379D2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift */,
+				850DC00A2A81B3BD00B1144B /* Budget.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -125,6 +163,9 @@
 			dependencies = (
 			);
 			name = "Income & Expense Tracker";
+			packageProductDependencies = (
+				850DC0062A819DA800B1144B /* SwiftUICharts */,
+			);
 			productName = "Income & Expense Tracker";
 			productReference = 853955042A59054A001970F6 /* Income & Expense Tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -153,6 +194,9 @@
 				Base,
 			);
 			mainGroup = 853954FB2A59054A001970F6;
+			packageReferences = (
+				850DC0052A819DA800B1144B /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
+			);
 			productRefGroup = 853955052A59054A001970F6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -182,13 +226,19 @@
 			files = (
 				853955232A59180D001970F6 /* DataProvider.swift in Sources */,
 				8539552B2A59392E001970F6 /* AddExpenseViewController.swift in Sources */,
+				850DC00B2A81B3BD00B1144B /* Budget.swift in Sources */,
 				8539550C2A59054A001970F6 /* ViewController.swift in Sources */,
+				850DBFF82A80D3DA00B1144B /* ExpenseSummaryView.swift in Sources */,
 				853955202A591779001970F6 /* ExpenseCell.swift in Sources */,
+				8525379E2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift in Sources */,
+				850DBFFA2A80D57B00B1144B /* UIKitViewControllerWrapper.swift in Sources */,
 				853955082A59054A001970F6 /* AppDelegate.swift in Sources */,
 				853955272A59305C001970F6 /* ExpenseListViewController.swift in Sources */,
+				850DBFFC2A80D6AA00B1144B /* BudgetsSettingView.swift in Sources */,
 				8539550A2A59054A001970F6 /* SceneDelegate.swift in Sources */,
 				853955252A59182B001970F6 /* Expense.swift in Sources */,
 				85B3D1342A68EA88004330F4 /* ExpenseDetailsViewController.swift in Sources */,
+				850DBFF52A80D0C500B1144B /* SidebarMenuView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +458,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		850DC0052A819DA800B1144B /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willdale/SwiftUICharts#Pie-Chart";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		850DC0062A819DA800B1144B /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 850DC0052A819DA800B1144B /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 853954FC2A59054A001970F6 /* Project object */;
 }
