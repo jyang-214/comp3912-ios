@@ -25,7 +25,14 @@ struct SidebarMenuView: View {
                     BudgetsSettingView()
                 }
                 .padding(.bottom, 10)
-                
+                NavigationLink("Export Data") {
+                    ExportView()
+                }
+                .padding(.bottom, 10)
+                NavigationLink("Import Data") {
+                    ImportView()
+                }
+                .padding(.bottom, 10)
                 Spacer()
             }
             .navigationBarHidden(true)

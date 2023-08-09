@@ -13,7 +13,9 @@
 		850DBFFC2A80D6AA00B1144B /* BudgetsSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850DBFFB2A80D6AA00B1144B /* BudgetsSettingView.swift */; };
 		850DC0072A819DA800B1144B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 850DC0062A819DA800B1144B /* SwiftUICharts */; };
 		850DC00B2A81B3BD00B1144B /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850DC00A2A81B3BD00B1144B /* Budget.swift */; };
+		850DC00D2A83526600B1144B /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850DC00C2A83526600B1144B /* ExportView.swift */; };
 		8525379E2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525379D2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift */; };
+		85363B712A835E0800F905C7 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85363B702A835E0800F905C7 /* ImportView.swift */; };
 		853955082A59054A001970F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853955072A59054A001970F6 /* AppDelegate.swift */; };
 		8539550A2A59054A001970F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853955092A59054A001970F6 /* SceneDelegate.swift */; };
 		8539550C2A59054A001970F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8539550B2A59054A001970F6 /* ViewController.swift */; };
@@ -35,7 +37,10 @@
 		850DBFFB2A80D6AA00B1144B /* BudgetsSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetsSettingView.swift; sourceTree = "<group>"; };
 		850DC0002A819CFC00B1144B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		850DC00A2A81B3BD00B1144B /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
+		850DC00C2A83526600B1144B /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
+		850DC00E2A83554D00B1144B /* Income & Expense TrackerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Income & Expense TrackerRelease.entitlements"; sourceTree = "<group>"; };
 		8525379D2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensePersistenceManager.swift; sourceTree = "<group>"; };
+		85363B702A835E0800F905C7 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		853955042A59054A001970F6 /* Income & Expense Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Income & Expense Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		853955072A59054A001970F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		853955092A59054A001970F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +76,8 @@
 				850DBFF72A80D3DA00B1144B /* ExpenseSummaryView.swift */,
 				850DBFF92A80D57B00B1144B /* UIKitViewControllerWrapper.swift */,
 				850DBFFB2A80D6AA00B1144B /* BudgetsSettingView.swift */,
+				850DC00C2A83526600B1144B /* ExportView.swift */,
+				85363B702A835E0800F905C7 /* ImportView.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -103,6 +110,7 @@
 		853955062A59054A001970F6 /* Income & Expense Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				850DC00E2A83554D00B1144B /* Income & Expense TrackerRelease.entitlements */,
 				850DBFF62A80D13E00B1144B /* SwiftUI */,
 				853955212A5917F7001970F6 /* Data */,
 				8539551E2A591768001970F6 /* Cell */,
@@ -232,10 +240,12 @@
 				853955202A591779001970F6 /* ExpenseCell.swift in Sources */,
 				8525379E2A6B6FEC00C0AF98 /* ExpensePersistenceManager.swift in Sources */,
 				850DBFFA2A80D57B00B1144B /* UIKitViewControllerWrapper.swift in Sources */,
+				850DC00D2A83526600B1144B /* ExportView.swift in Sources */,
 				853955082A59054A001970F6 /* AppDelegate.swift in Sources */,
 				853955272A59305C001970F6 /* ExpenseListViewController.swift in Sources */,
 				850DBFFC2A80D6AA00B1144B /* BudgetsSettingView.swift in Sources */,
 				8539550A2A59054A001970F6 /* SceneDelegate.swift in Sources */,
+				85363B712A835E0800F905C7 /* ImportView.swift in Sources */,
 				853955252A59182B001970F6 /* Expense.swift in Sources */,
 				85B3D1342A68EA88004330F4 /* ExpenseDetailsViewController.swift in Sources */,
 				850DBFF52A80D0C500B1144B /* SidebarMenuView.swift in Sources */,
@@ -388,12 +398,13 @@
 				DEVELOPMENT_TEAM = CB54P9A76D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Income & Expense Tracker/Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -412,17 +423,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Income & Expense Tracker/Income & Expense TrackerRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CB54P9A76D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Income & Expense Tracker/Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
