@@ -9,14 +9,13 @@ import Foundation
 import UIKit
 
 class ExpenseDetailsViewController: UIViewController {
-    var expenseData: Expense? // Create a property to hold the selected expense data
-    
+    var expenseData: Expense?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         setupLabels()
-        addCloseButtonToNavigationBar() // Add the custom "Close" button to the navigation bar
+        addCloseButtonToNavigationBar()
         title = expenseData?.expenseName
     }
     
@@ -32,7 +31,7 @@ class ExpenseDetailsViewController: UIViewController {
         
         let categoryTextLabel = UILabel()
         let categoryLabel = UILabel()
-
+        
         
         let amountTextLabel = UILabel()
         let amountLabel = UILabel()
@@ -43,44 +42,42 @@ class ExpenseDetailsViewController: UIViewController {
         let descriptionTextLabel = UILabel()
         let descriptionLabel = UILabel()
         
-        // Customize label properties
         nameTextLabel.textColor = .black
         nameLabel.textColor = .black
-        nameLabel.textAlignment = .left // Align the text to the left
-        nameLabel.numberOfLines = 0 // Allow multiple lines
+        nameLabel.textAlignment = .left
+        nameLabel.numberOfLines = 0
         
         dateTextLabel.textColor = .black
         dateLabel.textColor = .black
-        dateLabel.textAlignment = .left // Align the text to the left
-        dateLabel.numberOfLines = 0 // Allow multiple lines
+        dateLabel.textAlignment = .left
+        dateLabel.numberOfLines = 0
         
         typeTextLabel.textColor = .black
         typeLabel.textColor = .black
-        typeLabel.textAlignment = .left // Align the text to the left
-        typeLabel.numberOfLines = 0 // Allow multiple lines
+        typeLabel.textAlignment = .left
+        typeLabel.numberOfLines = 0
         
         categoryTextLabel.textColor = .black
         categoryLabel.textColor = .black
-        categoryLabel.textAlignment = .left // Align the text to the left
-        categoryLabel.numberOfLines = 0 // Allow multiple lines
-
+        categoryLabel.textAlignment = .left
+        categoryLabel.numberOfLines = 0
+        
         amountTextLabel.textColor = .black
         amountLabel.textColor = .black
-        amountLabel.textAlignment = .left // Align the text to the left
-        amountLabel.numberOfLines = 0 // Allow multiple lines
+        amountLabel.textAlignment = .left
+        amountLabel.numberOfLines = 0
         
         paymentTypeTextLabel.textColor = .black
         paymentTypeLabel.textColor = .black
-        paymentTypeLabel.textAlignment = .left // Align the text to the left
-        paymentTypeLabel.numberOfLines = 0 // Allow multiple lines
+        paymentTypeLabel.textAlignment = .left
+        paymentTypeLabel.numberOfLines = 0
         
         descriptionTextLabel.textColor = .black
         descriptionLabel.textColor = .black
-        descriptionLabel.textAlignment = .left // Align the text to the left
-        descriptionLabel.numberOfLines = 0 // Allow multiple lines
-
+        descriptionLabel.textAlignment = .left
+        descriptionLabel.numberOfLines = 0
+        
         if let expense = expenseData {
-            // Set label text from expenseData
             nameTextLabel.text = "Transaction Name: "
             nameLabel.text = expense.expenseName
             
@@ -103,7 +100,6 @@ class ExpenseDetailsViewController: UIViewController {
             descriptionLabel.text = expense.description
         }
         
-        // Set a fixed width for the text labels to make them align properly
         nameTextLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         dateTextLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         typeTextLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
@@ -112,7 +108,6 @@ class ExpenseDetailsViewController: UIViewController {
         paymentTypeTextLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         descriptionTextLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
-        // Add labels to the view
         let nameStackView = UIStackView(arrangedSubviews: [nameTextLabel, nameLabel])
         nameStackView.axis = .horizontal
         nameStackView.spacing = 8

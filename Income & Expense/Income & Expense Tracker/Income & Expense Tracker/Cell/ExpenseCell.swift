@@ -11,15 +11,6 @@ import UIKit
 
 class ExpenseCell: UITableViewCell {
     
-    //    lazy var avatarView: UIImageView = {
-    //            let iv = UIImageView()
-    //            iv.translatesAutoresizingMaskIntoConstraints=false
-    //            iv.heightAnchor.constraint(equalToConstant: 60).isActive = true
-    //            iv.widthAnchor.constraint(equalToConstant: 60).isActive = true
-    //            iv.layer.cornerRadius = 30
-    //            return iv
-    //    }()
-    
     lazy var expenseNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints=false
@@ -74,13 +65,6 @@ class ExpenseCell: UITableViewCell {
         stack.alignment = .center
         return stack
     }()
-    
-    //    lazy var shareButton: UIButton = {
-    //        let button = UIButton()
-    //        button.translatesAutoresizingMaskIntoConstraints=false
-    //        button.setImage(UIImage(named: "share"), for: .normal)
-    //        return button
-    //    }()
     
     lazy var contentStack: UIStackView = {
         let stack = UIStackView()

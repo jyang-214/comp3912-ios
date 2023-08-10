@@ -10,18 +10,13 @@ import SwiftUI
 struct ExpenseSummaryView: View {
     var body: some View {
         VStack {
-                    // Calculate and display the category sums
-                    calculateAndPrintCategorySums()
-                    
-                    
-                }
+            calculateAndPrintCategorySums()
+        }
         VStack {
-            // Display the bar chart
             BarChart(categories: getCategorySumsForChart())
                 .frame(maxWidth: .infinity)
                 .padding()
         }
-
     }
     
     func calculateAndPrintCategorySums() -> some View {
@@ -44,19 +39,18 @@ struct ExpenseSummaryView: View {
     }
     
     func getCategorySumsForChart() -> [BarChartData] {
-            let loadedData = ExpensePersistenceManager.loadData()
-            var categorySums: [String: Double] = [:]
-            
-            for expenseSection in loadedData {
-                for expense in expenseSection.1 {
-                    let category = expense.category
-                    let amount = expense.dollarAmount
-                    categorySums[category, default: 0.0] += amount
-                }
+        let loadedData = ExpensePersistenceManager.loadData()
+        var categorySums: [String: Double] = [:]
+        
+        for expenseSection in loadedData {
+            for expense in expenseSection.1 {
+                let category = expense.category
+                let amount = expense.dollarAmount
+                categorySums[category, default: 0.0] += amount
             }
-            
-            return categorySums.map { BarChartData(category: $0.key, value: $0.value) }
         }
+        return categorySums.map { BarChartData(category: $0.key, value: $0.value) }
+    }
 }
 
 struct BarChartData {

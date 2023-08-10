@@ -21,9 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let viewController = ExpenseListViewController()
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "ExpenseListViewController")
         
         let navigation = UINavigationController(rootViewController: viewController)
         window.rootViewController = navigation

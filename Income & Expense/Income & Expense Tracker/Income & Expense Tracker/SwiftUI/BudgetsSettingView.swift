@@ -18,7 +18,7 @@ struct BudgetsSettingView: View {
     @State private var othersAmount: String = ""
     
     @State private var showAlert = false
-
+    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -35,7 +35,6 @@ struct BudgetsSettingView: View {
             
             
             Button(action: {
-                // Add your save functionality here
                 saveBudgets()
             }) {
                 Text("Save")
@@ -63,7 +62,7 @@ struct BudgetsSettingView: View {
                   dismissButton: .default(Text("OK")))
         }
         Spacer()
-
+        
     }
     
     private func expenseRow(label: String, amount: Binding<String>) -> some View {
@@ -78,7 +77,6 @@ struct BudgetsSettingView: View {
     }
     
     private func saveBudgets() {
-        // Implement your logic here to save the budget amounts
         print("Budgets saved!")
         let budget = Budget(groceryAmount: groceryAmount,
                             restaurantAmount: restaurantAmount,

@@ -18,7 +18,6 @@ struct ImportView: View {
             if let importedData = importedData {
                 Text("Imported Data:")
                     .padding()
-                // Display the imported data here
             }
 
             Button("Import Data") {
@@ -31,12 +30,10 @@ struct ImportView: View {
                     let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                     let destinationURL = documentsURL.appendingPathComponent(fileURL.lastPathComponent)
 
-                    // Remove the existing file if it already exists
                     if FileManager.default.fileExists(atPath: destinationURL.path) {
                         try FileManager.default.removeItem(at: destinationURL)
                     }
 
-                    // Start accessing the security-scoped resource
                     if fileURL.startAccessingSecurityScopedResource() {
                         defer {
                             fileURL.stopAccessingSecurityScopedResource()

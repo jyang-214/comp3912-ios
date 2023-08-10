@@ -37,7 +37,7 @@ struct SidebarMenuView: View {
             }
             .navigationBarHidden(true)
             .padding(.top, 50)
-            .background(Color.white) // Set background color for sidebar
+            .background(Color.white)
         }
         .listStyle(SidebarListStyle())
     }

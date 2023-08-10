@@ -10,10 +10,8 @@ import Foundation
 class ExpensePersistenceManager {
     static let fileName = "expense_data.json"
     
-    // Define the ExpenseSection type here
     typealias ExpenseSection = (String, [Expense])
     
-    // Define the ExpenseSection wrapper class
     class ExpenseSectionWrapper: Codable {
         let date: String
         let expenses: [Expense]
@@ -23,7 +21,6 @@ class ExpensePersistenceManager {
             self.expenses = expenses
         }
         
-        // Provide the coding keys to map the properties
         enum CodingKeys: String, CodingKey {
             case date
             case expenses
